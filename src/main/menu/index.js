@@ -9,6 +9,7 @@ import { updateFormatMenu } from '../menu/actions/format'
 import { updateSelectionMenus } from '../menu/actions/paragraph'
 import { viewLayoutChanged } from '../menu/actions/view'
 import configureMenu, { configSettingMenu } from '../menu/templates'
+import { t as translate } from '../../common/i18n'
 
 const RECENTLY_USED_DOCUMENTS_FILE_NAME = 'recently-used-documents.json'
 const MAX_RECENTLY_USED_DOCUMENTS = 12
@@ -343,14 +344,18 @@ class AppMenu {
     }
 
     const userThemeList = this._userThemes ? this._userThemes.list() : []
-    const menuTemplate = configureMenu(this._keybindings, this._preferences, recentUsedDocuments, userThemeList)
+    const locale = this._preferences.getItem('language')
+    const t = key => translate(key, locale)
+    const menuTemplate = configureMenu(this._keybindings, this._preferences, recentUsedDocuments, userThemeList, t)
     const menu = Menu.buildFromTemplate(menuTemplate)
     return { menu, type: MenuType.EDITOR }
   }
 
   _buildSettingMenu () {
     if (isOsx) {
-      const menuTemplate = configSettingMenu(this._keybindings)
+      const locale = this._preferences.getItem('language')
+      const t = key => translate(key, locale)
+      const menuTemplate = configSettingMenu(this._keybindings, t)
       const menu = Menu.buildFromTemplate(menuTemplate)
       return { menu, type: MenuType.SETTINGS }
     }

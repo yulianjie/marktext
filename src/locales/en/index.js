@@ -8,6 +8,7 @@ import keybindings from './keybindings.json'
 import sidebar from './sidebar.json'
 import about from './about.json'
 import common from './common.json'
+import menu from './menu.json'
 
 export default {
   general,
@@ -19,5 +20,6 @@ export default {
   keybindings,
   sidebar,
   about,
-  common
+  common,
+  menu
 }
