@@ -87,6 +87,14 @@ jobs:
           restore-keys: |
             ${{ matrix.name }}-electron-cache-
 
+      # Some public git dependencies (e.g. file-icons) resolve to git+ssh URLs,
+      # which fail on CI runners that have no SSH key. Rewrite GitHub SSH to HTTPS.
+      - name: Use HTTPS for GitHub git dependencies
+        run: |
+          git config --global url."https://github.com/".insteadOf "ssh://git@github.com/"
+          git config --global url."https://github.com/".insteadOf "git@github.com:"
+        shell: bash
+
       - name: Install dependencies
         run: yarn install --check-files --frozen-lockfile
 
