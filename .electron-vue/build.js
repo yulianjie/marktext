@@ -12,24 +12,11 @@ const Listr = require('listr')
 
 
 function doTranslate() {
-  /*
-  let toLang = ''
-  if (process.env['lang']){
-    toLang = process.env['lang']
-  }
-  if (toLang == '') return true
-  */
-  const toLang='zh-cn'//强制使用中文
-  require('ts-node/register')
-  const { markTextAsarTranslate } = require('../marktext_asar_translate')
-  console.log(process.env['lang'])
-  const longRootPath = './'
-  const jsRootPath = './dist/electron/'
-  const mainJsFileName = path.join(jsRootPath, './main.js')
-  const outMainJsFileName = path.join(jsRootPath, './main.js')
-  const rendererJsFileName = path.join(jsRootPath, './renderer.js')
-  const outRendererJsFileName = path.join(jsRootPath, './renderer.js')
-  return markTextAsarTranslate(longRootPath, toLang, mainJsFileName, outMainJsFileName, rendererJsFileName, outRendererJsFileName)
+  // Legacy post-build string replacement is disabled: the renderer now uses
+  // vue-i18n (src/locales/**), so injecting hardcoded zh-CN strings into the
+  // built bundle would override the user's language choice and produce a
+  // mixed-language UI.
+  return true
 }
 
 

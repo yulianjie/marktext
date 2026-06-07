@@ -18,6 +18,11 @@
     "debug": "Dump keyboard information"
   },
   "debugHeading": "Debug options:",
+  "dialog": {
+    "placeholder": "Press a key combination",
+    "instruction": "Press Enter to continue or ESC to exit.",
+    "invalid": "Current key combination cannot be bound!"
+  },
   "notify": {
     "saveFailedTitle": "Failed to save",
     "saveError": "An unexpected error occurred while saving.",

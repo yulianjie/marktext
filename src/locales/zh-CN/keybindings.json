@@ -18,6 +18,11 @@
     "debug": "导出键盘信息"
   },
   "debugHeading": "调试选项：",
+  "dialog": {
+    "placeholder": "请按下组合键",
+    "instruction": "按 Enter 确认，ESC 取消。",
+    "invalid": "当前组合键不能被绑定！"
+  },
   "notify": {
     "saveFailedTitle": "保存失败",
     "saveError": "保存时发生意外错误。",

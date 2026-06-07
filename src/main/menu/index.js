@@ -422,6 +422,31 @@ class AppMenu {
       if (prefs.autoSave !== undefined) {
         this.updateAutoSaveMenu(prefs.autoSave)
       }
+      if (prefs.language !== undefined) {
+        this.rebuildAllMenusForLanguageChange()
+      }
+    })
+  }
+
+  /**
+   * Rebuild every window menu so localized labels reflect the new language.
+   */
+  rebuildAllMenusForLanguageChange () {
+    this.windowMenus.forEach((value, windowId) => {
+      const { type } = value
+      if (type === MenuType.EDITOR) {
+        const { menu: newMenu } = this._buildEditorMenu()
+        value.menu = newMenu
+        if (this.activeWindowId === windowId) {
+          this._setApplicationMenu(newMenu)
+        }
+      } else if (type === MenuType.SETTINGS) {
+        const rebuilt = this._buildSettingMenu()
+        value.menu = rebuilt.menu
+        if (this.activeWindowId === windowId) {
+          this._setApplicationMenu(rebuilt.menu)
+        }
+      }
     })
   }
 }

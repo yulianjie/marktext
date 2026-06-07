@@ -6,5 +6,44 @@
     "upload": "Upload image to cloud using selected uploader (must be configured below)",
     "copy": "Copy image to designated relative assets or global local folder",
     "keep": "Keep original location"
+  },
+  "folder": {
+    "title": "Global or relative image folder",
+    "globalDesc": "Global image folder",
+    "open": "Open...",
+    "showInFolder": "Show in Folder",
+    "preferRelative": "Prefer relative assets folder",
+    "relativeDesc": "Relative image folder name",
+    "filenameHint": "Include {filename} in the text-box above to automatically insert the document file name."
+  },
+  "uploader": {
+    "title": "Uploader",
+    "currentIs": "The current image uploader is {name}.",
+    "noneSelected": "Currently no uploader is selected. Please select an uploader and config it.",
+    "picgoMissing": "Your system does not have {link} installed, please install it before use.",
+    "githubDeprecated": "Github will be removed in a future version, please use picgo",
+    "githubToken": "GitHub token:",
+    "githubTokenTooltip": "The token is saved by Keychain on macOS, Secret Service API/libsecret on Linux and Credential Vault on Windows",
+    "tokenPlaceholder": "Input token",
+    "ownerLabel": "Owner name:",
+    "ownerPlaceholder": "owner",
+    "repoLabel": "Repo name:",
+    "repoPlaceholder": "repo",
+    "branchLabel": "Branch name (optional):",
+    "branchPlaceholder": "branch",
+    "save": "Save",
+    "scriptDesc": "The script will be executed with the image file path as its only argument and it should output any valid value for the src attribute of a HTMLImageElement.",
+    "scriptLabel": "Shell script location:",
+    "scriptPlaceholder": "Script absolute path",
+    "saveConfigTitle": "Save Config",
+    "saveGithubMsg": "The Github configuration has been saved.",
+    "saveScriptMsg": "The command line script configuration has been saved."
+  },
+  "legalNotice": {
+    "prefix": "By using {name}, you agree to {name}'s",
+    "privacy": "Privacy Statement",
+    "and": "and",
+    "tos": "Terms of Service",
+    "gdpr": "This service cannot be used in Europe due to GDPR issues."
   }
 }

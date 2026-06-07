@@ -11,7 +11,8 @@ import { normalizeAndResolvePath } from '../filesystem'
 import { normalizeMarkdownPath } from '../filesystem/markdown'
 import { registerKeyboardListeners } from '../keyboard'
 import { selectTheme } from '../menu/actions/theme'
-import { dockMenu } from '../menu/templates'
+import { buildDockMenu } from '../menu/templates'
+import { t as translate } from '../../common/i18n'
 import registerSpellcheckerListeners from '../spellchecker'
 import { watchers } from '../utils/imagePathAutoComplement'
 import { WindowType } from '../windows/base'
@@ -162,6 +163,29 @@ class App {
     }
 
     let isDarkMode = nativeTheme.shouldUseDarkColors
+    const setupDockAndJumpList = () => {
+      const locale = preferences.getItem('language')
+      const t = key => translate(key, locale)
+      if (isOsx) {
+        app.dock.setMenu(buildDockMenu(t))
+      } else if (isWindows) {
+        app.setJumpList([{
+          type: 'recent'
+        }, {
+          type: 'tasks',
+          items: [{
+            type: 'task',
+            title: t('menu.jumplist.newWindow'),
+            description: t('menu.jumplist.newWindowDesc'),
+            program: process.execPath,
+            args: '--new-window',
+            iconPath: process.execPath,
+            iconIndex: 0
+          }]
+        }])
+      }
+    }
+
     ipcMain.on('broadcast-preferences-changed', change => {
       // Set Chromium's color for native elements after theme change.
       if (change.theme) {
@@ -174,26 +198,12 @@ class App {
           nativeTheme.themeSource = isDarkMode ? 'dark' : 'light'
         }
       }
+      if (change.language !== undefined) {
+        setupDockAndJumpList()
+      }
     })
 
-    if (isOsx) {
-      app.dock.setMenu(dockMenu)
-    } else if (isWindows) {
-      app.setJumpList([{
-        type: 'recent'
-      }, {
-        type: 'tasks',
-        items: [{
-          type: 'task',
-          title: 'New Window',
-          description: 'Opens a new window',
-          program: process.execPath,
-          args: '--new-window',
-          iconPath: process.execPath,
-          iconIndex: 0
-        }]
-      }])
-    }
+    setupDockAndJumpList()
 
     if (_openFilesCache.length) {
       this._openFilesToOpen()

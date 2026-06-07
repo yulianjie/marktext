@@ -1,47 +1,47 @@
 import * as actions from '../actions/theme'
 
 const BUILT_IN = [
-  { id: 'light', label: 'Cadmium Light' },
-  { id: 'dark', label: 'Dark' },
-  { id: 'graphite', label: 'Graphite Light' },
-  { id: 'material-dark', label: 'Material Dark' },
-  { id: 'one-dark', label: 'One Dark' },
-  { id: 'ulysses', label: 'Ulysses Light' },
-  { id: 'minimalist', label: 'Minimalist' },
-  { id: 'glass', label: 'Frosted Glass' },
-  { id: 'macos', label: 'macOS' }
+  { id: 'light', key: 'light' },
+  { id: 'dark', key: 'dark' },
+  { id: 'graphite', key: 'graphite' },
+  { id: 'material-dark', key: 'materialDark' },
+  { id: 'one-dark', key: 'oneDark' },
+  { id: 'ulysses', key: 'ulysses' },
+  { id: 'minimalist', key: 'minimalist' },
+  { id: 'glass', key: 'glass' },
+  { id: 'macos', key: 'macos' }
 ]
 
-export default function (userPreference, userThemes = []) {
+export default function (userPreference, userThemes = [], t) {
   const { theme } = userPreference.getAll()
 
-  const submenu = BUILT_IN.map(t => ({
-    label: t.label,
+  const submenu = BUILT_IN.map(item => ({
+    label: t(`menu.theme.${item.key}`),
     type: 'radio',
-    id: t.id,
-    checked: theme === t.id,
+    id: item.id,
+    checked: theme === item.id,
     click () {
-      actions.selectTheme(t.id)
+      actions.selectTheme(item.id)
     }
   }))
 
   if (userThemes.length > 0) {
     submenu.push({ type: 'separator' })
-    for (const t of userThemes) {
+    for (const ut of userThemes) {
       submenu.push({
-        label: t.name || t.id,
+        label: ut.name || ut.id,
         type: 'radio',
-        id: t.id,
-        checked: theme === t.id,
+        id: ut.id,
+        checked: theme === ut.id,
         click () {
-          actions.selectTheme(t.id)
+          actions.selectTheme(ut.id)
         }
       })
     }
   }
 
   return {
-    label: '&Theme',
+    label: t('menu.theme.name'),
     id: 'themeMenu',
     submenu
   }

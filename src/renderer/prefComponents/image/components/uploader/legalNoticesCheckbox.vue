@@ -2,11 +2,11 @@
   <div class="pref-cb-legal-notices">
     <el-checkbox v-model="uploaderService.agreedToLegalNotices"></el-checkbox>
     <span>
-      By using {{ uploaderService.name }}, you agree to {{ uploaderService.name }}'s
-      <span class="link" @click="openUrl(uploaderService.privacyUrl)">Privacy Statement</span>
-      and
-      <span class="link" @click="openUrl(uploaderService.tosUrl)">Terms of Service</span>.
-      <span v-if="!uploaderService.isGdprCompliant">This service cannot be used in Europe due to GDPR issues.</span>
+      {{ $t('image.legalNotice.prefix', { name: uploaderService.name }) }}
+      <span class="link" @click="openUrl(uploaderService.privacyUrl)">{{ $t('image.legalNotice.privacy') }}</span>
+      {{ $t('image.legalNotice.and') }}
+      <span class="link" @click="openUrl(uploaderService.tosUrl)">{{ $t('image.legalNotice.tos') }}</span>.
+      <span v-if="!uploaderService.isGdprCompliant">{{ $t('image.legalNotice.gdpr') }}</span>
     </span>
   </div>
 </template>

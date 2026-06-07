@@ -1,22 +1,22 @@
-export default function (keybindings) {
+export default function (keybindings, t) {
   return {
-    label: 'Edit',
+    label: t('menu.prefEdit.name'),
     submenu: [{
-      label: 'Cut',
+      label: t('menu.prefEdit.cut'),
       accelerator: keybindings.getAccelerator('edit.cut'),
       role: 'cut'
     }, {
-      label: 'Copy',
+      label: t('menu.prefEdit.copy'),
       accelerator: keybindings.getAccelerator('edit.copy'),
       role: 'copy'
     }, {
-      label: 'Paste',
+      label: t('menu.prefEdit.paste'),
       accelerator: keybindings.getAccelerator('edit.paste'),
       role: 'paste'
     }, {
       type: 'separator'
     }, {
-      label: 'Select All',
+      label: t('menu.prefEdit.selectAll'),
       accelerator: keybindings.getAccelerator('edit.select-all'),
       role: 'selectAll'
     }]

@@ -6,5 +6,44 @@
     "upload": "通过选定的上传器上传到云端（需在下方配置）",
     "copy": "复制到指定相对资源目录或全局本地文件夹",
     "keep": "保持原位置"
+  },
+  "folder": {
+    "title": "全局或相对图片文件夹",
+    "globalDesc": "全局图片文件夹",
+    "open": "打开...",
+    "showInFolder": "在文件夹中显示",
+    "preferRelative": "优先使用相对资源文件夹",
+    "relativeDesc": "相对图片文件夹名称",
+    "filenameHint": "在上方文本框中使用 {filename} 可自动插入文档文件名。"
+  },
+  "uploader": {
+    "title": "上传器",
+    "currentIs": "当前图片上传器为 {name}。",
+    "noneSelected": "当前未选择任何上传器，请先选择并配置一个。",
+    "picgoMissing": "系统未安装 {link}，请先安装后再使用。",
+    "githubDeprecated": "Github 将在未来版本中移除，请使用 picgo。",
+    "githubToken": "GitHub Token：",
+    "githubTokenTooltip": "Token 在 macOS 上保存于 Keychain，Linux 上保存于 Secret Service API/libsecret，Windows 上保存于凭据保险库。",
+    "tokenPlaceholder": "输入 token",
+    "ownerLabel": "Owner 名称：",
+    "ownerPlaceholder": "owner",
+    "repoLabel": "Repo 名称：",
+    "repoPlaceholder": "repo",
+    "branchLabel": "Branch 名称（可选）：",
+    "branchPlaceholder": "branch",
+    "save": "保存",
+    "scriptDesc": "该脚本将以图片文件路径作为唯一参数执行，并应输出任何 HTMLImageElement src 属性可接受的有效值。",
+    "scriptLabel": "Shell 脚本路径：",
+    "scriptPlaceholder": "脚本绝对路径",
+    "saveConfigTitle": "保存配置",
+    "saveGithubMsg": "Github 配置已保存。",
+    "saveScriptMsg": "命令行脚本配置已保存。"
+  },
+  "legalNotice": {
+    "prefix": "使用 {name} 即表示您同意 {name} 的",
+    "privacy": "隐私声明",
+    "and": "及",
+    "tos": "服务条款",
+    "gdpr": "由于 GDPR 限制，该服务不可在欧洲地区使用。"
   }
 }
