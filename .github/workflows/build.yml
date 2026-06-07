@@ -103,6 +103,8 @@ jobs:
     env:
       # MARKTEXT_IS_STABLE: 1
       MARKTEXT_EXIT_ON_ERROR: 1
+      # Suppress C4996 (deprecated v8 API) so the new MSVC builds the native modules.
+      CL: /wd4996
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
