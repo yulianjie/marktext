@@ -45,9 +45,10 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # No Apple Developer certificate available — don't attempt code signing.
       CSC_IDENTITY_AUTO_DISCOVERY: false
-      # Suppress C4996 (deprecated v8 API) so the new MSVC on Windows runners
-      # doesn't fail building Electron 17 native modules. Ignored on Unix.
-      CL: /wd4996
+      # Native modules (native-keymap, …) build with /sdl, which promotes the
+      # deprecated-v8-API warning (C4996) to an error on the new MSVC. _CL_ is
+      # appended after the project flags, so /sdl- wins. Ignored on Unix.
+      _CL_: "/sdl- /wd4996"
 
     steps:
       - name: Check out Git repository

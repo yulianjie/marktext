@@ -103,8 +103,9 @@ jobs:
     env:
       # MARKTEXT_IS_STABLE: 1
       MARKTEXT_EXIT_ON_ERROR: 1
-      # Suppress C4996 (deprecated v8 API) so the new MSVC builds the native modules.
-      CL: /wd4996
+      # /sdl in the native modules promotes C4996 (deprecated v8 API) to an error;
+      # _CL_ appends after the project flags so /sdl- wins.
+      _CL_: "/sdl- /wd4996"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
