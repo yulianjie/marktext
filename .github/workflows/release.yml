@@ -26,15 +26,15 @@ jobs:
           - name: linux-x64
             os: ubuntu-latest
             build: yarn run release:linux
-          # macOS x64 and arm64 are built on separate runners on purpose:
-          # electron-builder.yml sets `npmRebuild: false`, so native modules are
-          # only compiled for the host architecture. Building both arches on one
-          # runner would ship the wrong native binaries for the cross arch.
-          # Only the zip target is built — DMG creation in electron-builder 22
-          # needs Python 2 (/usr/bin/python), which modern macOS runners lack.
+          # Both macOS arches build on the arm64 runner — the Intel macos-13
+          # runner is scarce and queues for a long time. x64 is cross-compiled:
+          # electron-rebuild produces x64 native modules (clang -arch x86_64)
+          # before electron-builder packages the x64 app. Only the zip target is
+          # built — DMG creation in electron-builder 22 needs Python 2
+          # (/usr/bin/python), which modern macOS runners lack.
           - name: mac-x64
-            os: macos-13
-            build: node .electron-vue/build.js && yarn electron-builder --mac zip --x64
+            os: macos-14
+            build: node .electron-vue/build.js && yarn electron-rebuild -f --arch x64 && yarn electron-builder --mac zip --x64
           - name: mac-arm64
             os: macos-14
             build: node .electron-vue/build.js && yarn electron-builder --mac zip --arm64
