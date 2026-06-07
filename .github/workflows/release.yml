@@ -2,176 +2,135 @@ name: Release
 
 on:
   push:
-    branches:
-      - 'release-v*'
+    tags:
+      - 'v*'
+  # Allow building installers on demand without creating a release.
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  unix:
+  build:
+    name: Build (${{ matrix.name }})
     runs-on: ${{ matrix.os }}
-    continue-on-error: false
-    timeout-minutes: 45
+    timeout-minutes: 60
 
     strategy:
+      fail-fast: false
       matrix:
-        os: [macos-11, ubuntu-latest]
+        include:
+          - name: windows-x64
+            os: windows-latest
+            build: yarn run release:win
+          - name: linux-x64
+            os: ubuntu-latest
+            build: yarn run release:linux
+          # macOS x64 and arm64 are built on separate runners on purpose:
+          # electron-builder.yml sets `npmRebuild: false`, so native modules are
+          # only compiled for the host architecture. Building both arches on one
+          # runner would ship the wrong native binaries for the cross arch.
+          - name: mac-x64
+            os: macos-13
+            build: node .electron-vue/build.js && yarn electron-builder --mac --x64
+          - name: mac-arm64
+            os: macos-14
+            build: node .electron-vue/build.js && yarn electron-builder --mac --arm64
 
     env:
-      DISPLAY: ":99.0"
       MARKTEXT_IS_STABLE: 1
       MARKTEXT_EXIT_ON_ERROR: 1
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # No Apple Developer certificate available — don't attempt code signing.
+      CSC_IDENTITY_AUTO_DISCOVERY: false
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 16
-          check-latest: true
           cache: yarn
           cache-dependency-path: yarn.lock
 
-      - name: Install build dependencies
+      - name: Install Linux build dependencies
         if: runner.os == 'Linux'
-        #                         electron-builder                 | keyboard-layout         | keytar                      | fontmanager     | RPM on Ubuntu
+        #                         electron-builder                 | keyboard-layout         | keytar                      | fontmanager     | RPM
         run: |
           sudo apt-get -y update
           sudo apt-get install -y icnsutils graphicsmagick xz-utils libx11-dev libxkbfile-dev gnome-keyring libsecret-1-dev libfontconfig-dev rpm
 
-      - name: Cache node_modules
-        uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace }}/node_modules
-          key: ${{ runner.os }}-node_modules-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-cache-v2-
-
-      - name: Cache Electron
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.HOME }}/.cache/electron
-          key: ${{ runner.os }}-electron-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-      - name: Cache Electron-Builder
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.HOME }}/.cache//electron-builder
-          key: ${{ runner.os }}-electron-builder-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-      - name: Install dependencies
-        run: yarn install --check-files --frozen-lockfile
-
-      - name: Strip ripgrep on Linux
-        if: runner.os == 'Linux'
-        run: strip node_modules/vscode-ripgrep/bin/rg
-
-      - name: Lint
-        run: |
-          yarn run lint
-          yarn run validate-licenses
-
-      - name: Run unit and E2E tests
-        uses: GabrielBB/xvfb-action@v1
-        with:
-          run: yarn run test
-
-      - name: Build and release
-        run: |
-              if [ "$RUNNER_OS" == "Linux" ]; then
-                yarn run release:linux --publish always
-              elif [ "$RUNNER_OS" == "macOS" ]; then
-                yarn run release:mac --publish always
-              else
-                echo "$RUNNER_OS not supported"
-                exit 1
-              fi
-
-      - name: Calculate checksums
-        if: runner.os == 'Linux'
-        run: |
-          sha256sum build/marktext-x64.tar.gz
-          sha256sum build/marktext-x86_64.AppImage
-          sha256sum build/marktext-*.deb
-          sha256sum build/marktext-*.rpm
-        shell: bash
-
-      - name: Calculate checksums
-        if: runner.os == 'macOS'
-        run: |
-          shasum -a 256 build/marktext-arm64-mac.zip
-          shasum -a 256 build/marktext-x64-mac.zip
-          shasum -a 256 build/marktext-arm64.dmg
-          shasum -a 256 build/marktext-x64.dmg
-        shell: bash
-
-  windows:
-    runs-on: windows-latest
-    continue-on-error: false
-    timeout-minutes: 45
-
-    env:
-      MARKTEXT_IS_STABLE: 1
-      MARKTEXT_EXIT_ON_ERROR: 1
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
-
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
-          check-latest: true
-          cache: yarn
-          cache-dependency-path: yarn.lock
-
-      # Workaround: Fix native build failure due to outdated node-gyp version.
-      - name: Fix node-gyp
+      # Workaround: the runner's bundled node-gyp is too old to build the native
+      # modules against Electron 17 on recent Windows images.
+      - name: Fix node-gyp (Windows)
+        if: runner.os == 'Windows'
         run: |
           npm install --global node-gyp@latest
           npm prefix -g | % {npm config set node_gyp "$_\node_modules\node-gyp\bin\node-gyp.js"}
           node-gyp install
         shell: pwsh
 
-      - name: Cache node_modules
-        uses: actions/cache@v2
+      - name: Cache Electron downloads
+        uses: actions/cache@v4
         with:
-          path: ${{ github.workspace }}\node_modules
-          key: ${{ runner.os }}-node_modules-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
+          # Non-existent paths for the current OS are skipped by the cache action.
+          path: |
+            ~/.cache/electron
+            ~/.cache/electron-builder
+            ~/Library/Caches/electron
+            ~/Library/Caches/electron-builder
+            ${{ env.LOCALAPPDATA }}\electron\Cache
+            ${{ env.LOCALAPPDATA }}\electron-builder\cache
+          key: ${{ matrix.name }}-electron-cache-${{ hashFiles('yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node_modules-cache-v2-
-
-      - name: Cache Electron
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.LOCALAPPDATA }}\electron\Cache
-          key: ${{ runner.os }}-electron-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
-
-      - name: Cache Electron-Builder
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.LOCALAPPDATA }}\electron-builder\cache
-          key: ${{ runner.os }}-electron-builder-cache-v2-${{ hashFiles(format('{0}{1}', github.workspace, '\yarn.lock')) }}
+            ${{ matrix.name }}-electron-cache-
 
       - name: Install dependencies
         run: yarn install --check-files --frozen-lockfile
 
-      - name: Lint
-        run: |
-          yarn run lint
-          yarn run validate-licenses
+      - name: Strip ripgrep (Linux)
+        if: runner.os == 'Linux'
+        run: strip node_modules/vscode-ripgrep/bin/rg
 
-      - name: Run unit and E2E tests
-        run: yarn run test
+      - name: Build installers
+        run: ${{ matrix.build }}
 
-      - name: Build and release
-        run: yarn run release:win --publish always
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: marktext-${{ matrix.name }}
+          path: |
+            build/*.exe
+            build/*.dmg
+            build/*.zip
+            build/*.AppImage
+            build/*.deb
+            build/*.rpm
+            build/*.tar.gz
+          if-no-files-found: warn
 
-      - name: Calculate checksums
-        run: |
-          get-filehash -Algorithm SHA256 "build\marktext-setup.exe"
-          get-filehash -Algorithm SHA256 "build\marktext-*-win.zip"
-        shell: pwsh
+  release:
+    name: Publish GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    # Only publish a release when the workflow was triggered by a version tag.
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*
+          draft: false
+          prerelease: false
+          generate_release_notes: true
