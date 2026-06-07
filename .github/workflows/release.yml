@@ -51,7 +51,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 22
           cache: yarn
           cache-dependency-path: yarn.lock
 
@@ -62,13 +62,12 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install -y icnsutils graphicsmagick xz-utils libx11-dev libxkbfile-dev gnome-keyring libsecret-1-dev libfontconfig-dev rpm
 
-      # Workaround: the runner's bundled node-gyp is too old to build the native
-      # modules against Electron 17 on recent Windows images. Pin to node-gyp 9.x
-      # — node-gyp 10+ pulls in undici, which needs APIs missing on Node 16.
+      # Workaround: ensure a recent node-gyp so native modules build against
+      # Electron 17 on recent Windows images.
       - name: Fix node-gyp (Windows)
         if: runner.os == 'Windows'
         run: |
-          npm install --global node-gyp@9
+          npm install --global node-gyp@latest
           npm prefix -g | % {npm config set node_gyp "$_\node_modules\node-gyp\bin\node-gyp.js"}
           node-gyp install
         shell: pwsh
