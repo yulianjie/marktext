@@ -38,6 +38,12 @@ jobs:
           cache: yarn
           cache-dependency-path: yarn.lock
 
+      # node-gyp's bundled gyp imports Python's distutils, removed in Python 3.12.
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Install build dependencies
         if: runner.os == 'Linux'
         #                         electron-builder                 | keyboard-layout         | keytar                      | fontmanager
@@ -110,6 +116,12 @@ jobs:
           check-latest: true
           cache: yarn
           cache-dependency-path: yarn.lock
+
+      # node-gyp's bundled gyp imports Python's distutils, removed in Python 3.12.
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
       - name: Cache node_modules
         uses: actions/cache@v2
