@@ -62,16 +62,6 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install -y icnsutils graphicsmagick xz-utils libx11-dev libxkbfile-dev gnome-keyring libsecret-1-dev libfontconfig-dev rpm
 
-      # Workaround: ensure a recent node-gyp so native modules build against
-      # Electron 17 on recent Windows images.
-      - name: Fix node-gyp (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          npm install --global node-gyp@latest
-          npm prefix -g | % {npm config set node_gyp "$_\node_modules\node-gyp\bin\node-gyp.js"}
-          node-gyp install
-        shell: pwsh
-
       - name: Cache Electron downloads
         uses: actions/cache@v4
         with:

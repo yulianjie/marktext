@@ -5711,7 +5711,7 @@ file-entry-cache@^6.0.1:
 
 "file-icons@github:file-icons/atom":
   version "2.1.47"
-  resolved "git+ssh://git@github.com/file-icons/atom.git#28520868aee66e576145a0b18aa2cde5444a897a"
+  resolved "git+https://github.com/file-icons/atom.git#28520868aee66e576145a0b18aa2cde5444a897a"
   dependencies:
     atom-fs v0.2.1
     lru-cache "^5.1.1"
