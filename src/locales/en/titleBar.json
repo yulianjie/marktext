@@ -1,0 +1,17 @@
+{
+  "wordsLabel": "Words:",
+  "charactersLabel": "Characters:",
+  "paragraphsLabel": "Paragraphs:",
+  "short": {
+    "word": "W",
+    "character": "C",
+    "paragraph": "P",
+    "all": "A"
+  },
+  "summary": {
+    "word": "{count} word | {count} words",
+    "character": "{count} character | {count} characters",
+    "paragraph": "{count} paragraph | {count} paragraphs",
+    "all": "{count} (with space)character | {count} (with space)characters"
+  }
+}

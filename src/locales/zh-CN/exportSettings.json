@@ -1,0 +1,68 @@
+{
+  "title": "导出选项",
+  "exportButton": "导出...",
+  "tabs": {
+    "info": "信息",
+    "page": "页面",
+    "style": "样式",
+    "theme": "主题",
+    "header": "页眉和页脚",
+    "toc": "目录"
+  },
+  "info": {
+    "description": "请自定义页面外观，然后点击“导出”继续。"
+  },
+  "page": {
+    "pageTitle": "页面标题：",
+    "pageSize": "页面尺寸：",
+    "customSize": "宽度/高度（毫米）：",
+    "landscape": "横向页面：",
+    "pageMargin": "页边距（毫米）：",
+    "topBottom": "上/下：",
+    "leftRight": "左/右："
+  },
+  "style": {
+    "overwriteFont": "覆盖主题字体设置：",
+    "fontFamily": "字体：",
+    "fontSize": "字号",
+    "lineHeight": "行高",
+    "autoNumberingHeadings": "标题自动编号：",
+    "showFrontMatter": "显示 Front Matter："
+  },
+  "theme": {
+    "description": "您可以通过选择主题来更改文档外观，或者手工创建一个主题。",
+    "label": "主题："
+  },
+  "headerFooter": {
+    "description": "如果定义了页眉和/或页脚，这些文本将显示在所有页面上。",
+    "headerType": "页眉类型：",
+    "headerLeft": "左侧页眉文本：",
+    "headerCenter": "主页眉文本：",
+    "headerRight": "右侧页眉文本：",
+    "footerType": "页脚类型：",
+    "footerLeft": "左侧页脚文本：",
+    "footerCenter": "主页脚文本：",
+    "footerRight": "右侧页脚文本：",
+    "customizeStyle": "自定义样式：",
+    "allowStyled": "允许带样式的页眉和页脚：",
+    "fontSize": "页眉和页脚字号"
+  },
+  "toc": {
+    "includeTopHeading": "包含顶级标题：",
+    "includeTopHeadingDetail": "同时包含第一级标题。",
+    "title": "标题："
+  },
+  "headerFooterTypes": {
+    "none": "无",
+    "singleCell": "单格",
+    "threeCells": "三格"
+  },
+  "headerFooterStyles": {
+    "default": "默认",
+    "simple": "简单",
+    "styled": "带样式"
+  },
+  "pageSize": {
+    "custom": "自定义"
+  }
+}

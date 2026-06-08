@@ -1,0 +1,21 @@
+{
+  "tabs": {
+    "close": "Close",
+    "closeOthers": "Close others",
+    "closeSaved": "Close saved tabs",
+    "closeAll": "Close all tabs",
+    "rename": "Rename",
+    "copyPath": "Copy path",
+    "showInFolder": "Show in folder"
+  },
+  "sideBar": {
+    "newFile": "New File",
+    "newDirectory": "New Directory",
+    "copy": "Copy",
+    "cut": "Cut",
+    "paste": "Paste",
+    "rename": "Rename",
+    "delete": "Move To Trash",
+    "showInFolder": "Show In Folder"
+  }
+}

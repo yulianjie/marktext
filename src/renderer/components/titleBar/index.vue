@@ -41,18 +41,18 @@
         <el-tooltip
           v-if="wordCount"
           class="item"
-          :content="`${wordCount[show]} ${HASH[show].full + (wordCount[show] > 1 ? 's' : '')}`"
+          :content="$tc(`titleBar.summary.${show}`, wordCount[show], { count: wordCount[show] })"
           placement="bottom-end"
         >
           <div slot="content">
             <div class="title-item">
-              <span class="front">Words:</span><span class="text">{{wordCount['word']}}</span>
+              <span class="front">{{ $t('titleBar.wordsLabel') }}</span><span class="text">{{wordCount['word']}}</span>
             </div>
             <div class="title-item">
-              <span class="front">Characters:</span><span class="text">{{wordCount['character']}}</span>
+              <span class="front">{{ $t('titleBar.charactersLabel') }}</span><span class="text">{{wordCount['character']}}</span>
             </div>
             <div class="title-item">
-              <span class="front">Paragraphs:</span><span class="text">{{wordCount['paragraph']}}</span>
+              <span class="front">{{ $t('titleBar.paragraphsLabel') }}</span><span class="text">{{wordCount['paragraph']}}</span>
             </div>
           </div>
           <div
@@ -61,7 +61,7 @@
             :class="[{ 'title-no-drag': platform !== 'darwin' }]"
             @click.stop="handleWordClick"
           >
-            <span class="text-center-vertical">{{ `${HASH[show].short} ${wordCount[show]}` }}</span>
+            <span class="text-center-vertical">{{ `${$t('titleBar.short.' + show)} ${wordCount[show]}` }}</span>
           </div>
         </el-tooltip>
       </div>
@@ -108,24 +108,6 @@ import { isOsx } from '@/util'
 export default {
   data () {
     this.isOsx = isOsx
-    this.HASH = {
-      word: {
-        short: 'W',
-        full: 'word'
-      },
-      character: {
-        short: 'C',
-        full: 'character'
-      },
-      paragraph: {
-        short: 'P',
-        full: 'paragraph'
-      },
-      all: {
-        short: 'A',
-        full: '(with space)character'
-      }
-    }
     this.windowIconMinimize = minimizePath
     this.windowIconRestore = restorePath
     this.windowIconMaximize = maximizePath

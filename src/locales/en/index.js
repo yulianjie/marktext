@@ -9,6 +9,16 @@ import sidebar from './sidebar.json'
 import about from './about.json'
 import common from './common.json'
 import menu from './menu.json'
+import titleBar from './titleBar.json'
+import explorer from './explorer.json'
+import findInFile from './findInFile.json'
+import editorView from './editorView.json'
+import commandPalette from './commandPalette.json'
+import exportSettings from './exportSettings.json'
+import importDialog from './importDialog.json'
+import recent from './recent.json'
+import tweet from './tweet.json'
+import contextMenu from './contextMenu.json'
 
 export default {
   general,
@@ -21,5 +31,15 @@ export default {
   sidebar,
   about,
   common,
-  menu
+  menu,
+  titleBar,
+  explorer,
+  findInFile,
+  editorView,
+  commandPalette,
+  exportSettings,
+  importDialog,
+  recent,
+  tweet,
+  contextMenu
 }

@@ -1,0 +1,23 @@
+{
+  "notifications": {
+    "ok": "Ok"
+  },
+  "table": {
+    "insertTable": "Insert Table",
+    "rows": "Rows",
+    "columns": "Columns",
+    "cancel": "Cancel",
+    "ok": "OK"
+  },
+  "toast": {
+    "uploadImageTitle": "Upload Image",
+    "spellingTitle": "Spelling",
+    "switchLanguageMissing": "Unable to switch to language \"{language}\". Requested language dictionary is missing.",
+    "switchLanguageError": "Error while switching to \"{language}\": {error}",
+    "exportFailedTitle": "Printing/Exporting {name} failed",
+    "exportFailedMessage": "There is something wrong when exporting.",
+    "printExportFailedTitle": "Printing/Exporting failed",
+    "exportPdfFailedMessage": "There is something wrong when export {name}.",
+    "printFailedMessage": "There is something wrong when print {name}."
+  }
+}

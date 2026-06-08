@@ -1,4 +1,5 @@
 import { getCurrentWindow, Menu as RemoteMenu, MenuItem as RemoteMenuItem } from '@electron/remote'
+import i18n from '@/i18n'
 import {
   CLOSE_THIS,
   CLOSE_OTHERS,
@@ -9,6 +10,13 @@ import {
   COPY_PATH,
   SHOW_IN_FOLDER
 } from './menuItems'
+
+// Resolve the i18n `labelKey` into a localized `label` at popup time so the
+// context menu follows the current language each time it opens.
+const localizeItem = item => {
+  const { labelKey, ...rest } = item
+  return labelKey ? { ...rest, label: i18n.t(labelKey) } : rest
+}
 
 export const showContextMenu = (event, tab) => {
   const menu = new RemoteMenu()
@@ -22,7 +30,7 @@ export const showContextMenu = (event, tab) => {
   })
 
   CONTEXT_ITEMS.forEach(item => {
-    const menuItem = new RemoteMenuItem(item)
+    const menuItem = new RemoteMenuItem(localizeItem(item))
     menuItem._tabId = tab.id
     menu.append(menuItem)
   })

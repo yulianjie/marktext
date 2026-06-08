@@ -1,0 +1,30 @@
+{
+  "search": {
+    "placeholder": "在文件夹中搜索...",
+    "caseSensitive": "区分大小写",
+    "wholeWord": "全字匹配",
+    "regex": "使用正则表达式",
+    "noFolderOpen": "未打开文件夹",
+    "noResults": "未找到结果。",
+    "limited": "搜索已限制为 100 个文件。",
+    "cancel": "取消",
+    "openFolder": "打开文件夹",
+    "resultInfo": "在 {fileCount} 个{fileUnit}中找到 {matchCount} 个{matchUnit}",
+    "match": "匹配项",
+    "matches": "匹配项",
+    "file": "文件",
+    "files": "文件",
+    "showMoreMatches": "显示更多匹配项"
+  },
+  "tree": {
+    "openedFiles": "已打开文件",
+    "saveAll": "全部保存",
+    "closeAll": "全部关闭",
+    "emptyProject": "空项目",
+    "createFile": "新建文件",
+    "openFolder": "打开文件夹"
+  },
+  "toc": {
+    "title": "大纲"
+  }
+}

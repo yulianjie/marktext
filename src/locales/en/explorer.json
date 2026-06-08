@@ -1,0 +1,30 @@
+{
+  "search": {
+    "placeholder": "Search in folder...",
+    "caseSensitive": "Case Sensitive",
+    "wholeWord": "Select whole word",
+    "regex": "Use query as RegEx",
+    "noFolderOpen": "No folder open",
+    "noResults": "No results found.",
+    "limited": "Search was limited to 100 files.",
+    "cancel": "Cancel",
+    "openFolder": "Open Folder",
+    "resultInfo": "{matchCount} {matchUnit} in {fileCount} {fileUnit}",
+    "match": "match",
+    "matches": "matches",
+    "file": "file",
+    "files": "files",
+    "showMoreMatches": "Show more matches"
+  },
+  "tree": {
+    "openedFiles": "Opened files",
+    "saveAll": "Save All",
+    "closeAll": "Close All",
+    "emptyProject": "Empty project",
+    "createFile": "Create File",
+    "openFolder": "Open Folder"
+  },
+  "toc": {
+    "title": "Table Of Contents"
+  }
+}

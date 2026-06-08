@@ -1,0 +1,23 @@
+{
+  "notifications": {
+    "ok": "确定"
+  },
+  "table": {
+    "insertTable": "插入表格",
+    "rows": "行数",
+    "columns": "列数",
+    "cancel": "取消",
+    "ok": "确定"
+  },
+  "toast": {
+    "uploadImageTitle": "上传图片",
+    "spellingTitle": "拼写检查",
+    "switchLanguageMissing": "无法切换到语言“{language}”。所需的语言词典缺失。",
+    "switchLanguageError": "切换到“{language}”时出错：{error}",
+    "exportFailedTitle": "打印/导出 {name} 失败",
+    "exportFailedMessage": "导出时发生错误。",
+    "printExportFailedTitle": "打印/导出失败",
+    "exportPdfFailedMessage": "导出 {name} 时发生错误。",
+    "printFailedMessage": "打印 {name} 时发生错误。"
+  }
+}

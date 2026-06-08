@@ -1,0 +1,21 @@
+{
+  "tabs": {
+    "close": "关闭",
+    "closeOthers": "关闭其他",
+    "closeSaved": "关闭已保存的标签页",
+    "closeAll": "关闭所有标签页",
+    "rename": "重命名",
+    "copyPath": "复制路径",
+    "showInFolder": "在文件夹中显示"
+  },
+  "sideBar": {
+    "newFile": "新建文件",
+    "newDirectory": "新建文件夹",
+    "copy": "复制",
+    "cut": "剪切",
+    "paste": "粘贴",
+    "rename": "重命名",
+    "delete": "移动到回收站",
+    "showInFolder": "在文件夹中显示"
+  }
+}

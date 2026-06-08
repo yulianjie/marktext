@@ -1,13 +1,15 @@
 import * as contextMenu from './actions'
 
 // NOTE: This are mutable fields that may change at runtime.
+// `labelKey` is an i18n key resolved at popup time so the menu follows the
+// current language (see ./index.js).
 
 export const SEPARATOR = {
   type: 'separator'
 }
 
 export const NEW_FILE = {
-  label: 'New File',
+  labelKey: 'contextMenu.sideBar.newFile',
   id: 'newFileMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.newFile()
@@ -15,7 +17,7 @@ export const NEW_FILE = {
 }
 
 export const NEW_DIRECTORY = {
-  label: 'New Directory',
+  labelKey: 'contextMenu.sideBar.newDirectory',
   id: 'newDirectoryMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.newDirectory()
@@ -23,7 +25,7 @@ export const NEW_DIRECTORY = {
 }
 
 export const COPY = {
-  label: 'Copy',
+  labelKey: 'contextMenu.sideBar.copy',
   id: 'copyMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.copy()
@@ -31,7 +33,7 @@ export const COPY = {
 }
 
 export const CUT = {
-  label: 'Cut',
+  labelKey: 'contextMenu.sideBar.cut',
   id: 'cutMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.cut()
@@ -39,7 +41,7 @@ export const CUT = {
 }
 
 export const PASTE = {
-  label: 'Paste',
+  labelKey: 'contextMenu.sideBar.paste',
   id: 'pasteMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.paste()
@@ -47,7 +49,7 @@ export const PASTE = {
 }
 
 export const RENAME = {
-  label: 'Rename',
+  labelKey: 'contextMenu.sideBar.rename',
   id: 'renameMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.rename()
@@ -55,7 +57,7 @@ export const RENAME = {
 }
 
 export const DELETE = {
-  label: 'Move To Trash',
+  labelKey: 'contextMenu.sideBar.delete',
   id: 'deleteMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.remove()
@@ -63,7 +65,7 @@ export const DELETE = {
 }
 
 export const SHOW_IN_FOLDER = {
-  label: 'Show In Folder',
+  labelKey: 'contextMenu.sideBar.showInFolder',
   id: 'showInFolderMenuItem',
   click (menuItem, browserWindow) {
     contextMenu.showInFolder()

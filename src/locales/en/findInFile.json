@@ -1,0 +1,12 @@
+{
+  "searchPlaceholder": "Search",
+  "replacePlaceholder": "Replacement",
+  "counter": "{index} / {total}",
+  "caseSensitive": "Case Sensitive",
+  "wholeWord": "Select whole word",
+  "regex": "Use query as RegEx",
+  "replaceAll": "Replace All",
+  "replaceSingle": "Replace Single",
+  "invalidRegex": "Invalid regular expression: /{query}/.",
+  "regexMatchEmpty": "RegExp: /{query}/ match empty string."
+}

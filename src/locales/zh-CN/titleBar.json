@@ -1,0 +1,17 @@
+{
+  "wordsLabel": "单词：",
+  "charactersLabel": "字符：",
+  "paragraphsLabel": "段落：",
+  "short": {
+    "word": "词",
+    "character": "字",
+    "paragraph": "段",
+    "all": "全"
+  },
+  "summary": {
+    "word": "{count} 个单词",
+    "character": "{count} 个字符",
+    "paragraph": "{count} 个段落",
+    "all": "{count} 个字符（含空格）"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "title": "Export Options",
+  "exportButton": "Export...",
+  "tabs": {
+    "info": "Info",
+    "page": "Page",
+    "style": "Style",
+    "theme": "Theme",
+    "header": "Header & Footer",
+    "toc": "Table of Contents"
+  },
+  "info": {
+    "description": "Please customize the page appearance and click on \"export\" to continue."
+  },
+  "page": {
+    "pageTitle": "The page title:",
+    "pageSize": "Page size:",
+    "customSize": "Width/Height in mm:",
+    "landscape": "Landscape orientation:",
+    "pageMargin": "Page margin in mm:",
+    "topBottom": "Top/Bottom:",
+    "leftRight": "Left/Right:"
+  },
+  "style": {
+    "overwriteFont": "Overwrite theme font settings:",
+    "fontFamily": "Font family:",
+    "fontSize": "Font size",
+    "lineHeight": "Line height",
+    "autoNumberingHeadings": "Auto numbering headings:",
+    "showFrontMatter": "Show front matter:"
+  },
+  "theme": {
+    "description": "You can change the document appearance by choosing a theme or create a handcrafted one.",
+    "label": "Theme:"
+  },
+  "headerFooter": {
+    "description": "The text appear on all pages if header and/or footer is defined.",
+    "headerType": "Header type:",
+    "headerLeft": "The left header text:",
+    "headerCenter": "The main header text:",
+    "headerRight": "The right header text:",
+    "footerType": "Footer type:",
+    "footerLeft": "The left footer text:",
+    "footerCenter": "The main footer text:",
+    "footerRight": "The right footer text:",
+    "customizeStyle": "Customize style:",
+    "allowStyled": "Allow styled header and footer:",
+    "fontSize": "Header and footer font size"
+  },
+  "toc": {
+    "includeTopHeading": "Include top heading:",
+    "includeTopHeadingDetail": "Includes the first heading level too.",
+    "title": "Title:"
+  },
+  "headerFooterTypes": {
+    "none": "None",
+    "singleCell": "Single cell",
+    "threeCells": "Three cells"
+  },
+  "headerFooterStyles": {
+    "default": "Default",
+    "simple": "Simple",
+    "styled": "Styled"
+  },
+  "pageSize": {
+    "custom": "Custom"
+  }
+}

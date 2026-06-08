@@ -34,10 +34,10 @@
       dir='ltr'
     >
       <div slot="title" class="dialog-title">
-        Insert Table
+        {{ $t('editorView.table.insertTable') }}
       </div>
       <el-form :model="tableChecker" :inline="true">
-        <el-form-item label="Rows">
+        <el-form-item :label="$t('editorView.table.rows')">
           <el-input-number
             ref="rowInput"
             size="mini"
@@ -47,7 +47,7 @@
             :max="30"
           ></el-input-number>
         </el-form-item>
-        <el-form-item label="Columns">
+        <el-form-item :label="$t('editorView.table.columns')">
           <el-input-number
             size="mini"
             v-model="tableChecker.columns"
@@ -59,10 +59,10 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogTableVisible = false">
-          Cancel
+          {{ $t('editorView.table.cancel') }}
         </el-button>
         <el-button type="primary" @click="handleDialogTableConfirm">
-          OK
+          {{ $t('editorView.table.ok') }}
         </el-button>
       </div>
     </el-dialog>
@@ -754,7 +754,7 @@ export default {
             destImagePath = await uploadImage(pathname, image, preferences)
           } catch (err) {
             notice.notify({
-              title: 'Upload Image',
+              title: this.$t('editorView.toast.uploadImageTitle'),
               type: 'warning',
               message: err
             })
@@ -827,9 +827,9 @@ export default {
           if (!langCode) {
             // Unable to switch language due to missing dictionary. The spell checker is now in an invalid state.
             notice.notify({
-              title: 'Spelling',
+              title: this.$t('editorView.toast.spellingTitle'),
               type: 'warning',
-              message: `Unable to switch to language "${languageCode}". Requested language dictionary is missing.`
+              message: this.$t('editorView.toast.switchLanguageMissing', { language: languageCode })
             })
           }
         })
@@ -838,9 +838,9 @@ export default {
           log.error(error)
 
           notice.notify({
-            title: 'Spelling',
+            title: this.$t('editorView.toast.spellingTitle'),
             type: 'error',
-            message: `Error while switching to "${languageCode}": ${error.message}`
+            message: this.$t('editorView.toast.switchLanguageError', { language: languageCode, error: error.message })
           })
         })
     },
@@ -982,9 +982,9 @@ export default {
           } catch (err) {
             log.error('Failed to export document:', err)
             notice.notify({
-              title: `Printing/Exporting ${htmlTitle || 'html'} failed`,
+              title: this.$t('editorView.toast.exportFailedTitle', { name: htmlTitle || 'html' }),
               type: 'error',
-              message: err.message || 'There is something wrong when exporting.'
+              message: err.message || this.$t('editorView.toast.exportFailedMessage')
             })
           }
           break
@@ -1011,9 +1011,9 @@ export default {
           } catch (err) {
             log.error('Failed to export document:', err)
             notice.notify({
-              title: 'Printing/Exporting failed',
+              title: this.$t('editorView.toast.printExportFailedTitle'),
               type: 'error',
-              message: `There is something wrong when export ${htmlTitle || 'PDF'}.`
+              message: this.$t('editorView.toast.exportPdfFailedMessage', { name: htmlTitle || 'PDF' })
             })
             this.handlePrintServiceClearup()
           }
@@ -1036,9 +1036,9 @@ export default {
           } catch (err) {
             log.error('Failed to export document:', err)
             notice.notify({
-              title: 'Printing/Exporting failed',
+              title: this.$t('editorView.toast.printExportFailedTitle'),
               type: 'error',
-              message: `There is something wrong when print ${htmlTitle || ''}.`
+              message: this.$t('editorView.toast.printFailedMessage', { name: htmlTitle || '' })
             })
             this.handlePrintServiceClearup()
           }
